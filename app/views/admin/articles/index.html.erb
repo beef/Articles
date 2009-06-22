@@ -25,7 +25,7 @@
       <td><%= article.updated_at.strftime('%d %b') %></td>
       <td><%= article.published_at.strftime('%d %b') unless article.published_at.nil? %></td>
       <td><%= article.published_to.strftime('%d %b') unless article.published_to.nil? %></td>
-      <td><%= link_to 'Show', article_permalink(article), :class => 'show' %></td>
+      <td><%= link_to 'Show', article_permalink(article), :class => 'show' if article.published? %></td>
       <td><%= link_to 'Edit', admin_article_path(article), :class => 'edit' %></td>
       <td><%= link_to 'Destroy', admin_article_path(article), :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %></td>
     </tr>
