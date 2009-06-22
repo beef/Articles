@@ -1,0 +1,12 @@
+<!-- so:post -->
+<dt>
+  <%= link_to h(article.title), article_permalink(article) %>
+  <%= link_to(image_tag(article.assets.images.first.public_filename(:medium)), article_permalink(article)) unless article.assets.images.first.nil? %>
+</dt>
+<dd>
+  <p class="post-meta">
+    <span class="date"><%= article.published_at.to_formatted_s(:short_dot) %></span> | posted by <%= link_to article.author, articles_authored_path(article.created_by) %>
+  </p>
+  <p><%=h article.description %></p>
+</dd>
+<!-- eo:post -->

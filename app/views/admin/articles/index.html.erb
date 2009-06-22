@@ -1,0 +1,45 @@
+<h1>Listing articles</h1>
+
+<ul class="choices">
+  <li><%= link_to 'New article', new_admin_article_path %></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <%= sortable_table_header :name => "Title",  :sort => "title" %>
+      <th>Status</th>
+      <th>Author</th>
+      <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
+      <%= sortable_table_header :name => "Published At",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Published To",  :sort => "published_to" %>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @articles.each do |article| %>
+    <tr id="article-<%= article.id %>">
+      <td><%=h article.title %></td>
+      <td><%= content_status(article) %></td>
+      <td><%= article.author %></td>
+      <td><%= article.updated_at.strftime('%d %b') %></td>
+      <td><%= article.published_at.strftime('%d %b') unless article.published_at.nil? %></td>
+      <td><%= article.published_to.strftime('%d %b') unless article.published_to.nil? %></td>
+      <td><%= link_to 'Show', article_permalink(article), :class => 'show' %></td>
+      <td><%= link_to 'Edit', admin_article_path(article), :class => 'edit' %></td>
+      <td><%= link_to 'Destroy', admin_article_path(article), :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %></td>
+    </tr>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <%= sortable_table_header :name => "Title",  :sort => "title" %>
+      <th>Status</th>
+      <th>Author</th>
+      <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
+      <%= sortable_table_header :name => "Published At",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Published To",  :sort => "published_to" %>
+      <th colspan="3">Actions</th>
+    </tr>
+  </tfoot>
+</table>

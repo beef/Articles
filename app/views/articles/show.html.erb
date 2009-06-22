@@ -1,0 +1,55 @@
+<% content_for 'header' do %>
+  <%= auto_discovery_link_tag :rss, articles_path(:rss) %>
+<% end %>
+
+<div id="main-content">
+  <h1>News</h1>
+  <%= link_to 'RSS', articles_path(:rss), :class => 'rss' %>
+  <div class="post">
+    <h2><%=h @article.title %></h2>
+    <p class="post-meta">
+      on <span class="date"><%= @article.published_at.to_formatted_s(:short_dot) %></span> by <%= link_to @article.author, articles_authored_path(@article.created_by) %>
+    </p>
+    <%= @article.body %>
+  
+    <% unless @article.assets.documents.empty? -%>
+    <ul>
+      <% for document in @article.assets.documents %>
+        <li><%= link_to document.filename %></li>
+      <% end %>
+    </ul>
+    <% end -%>
+
+    <a href="#" id="share-title" title="Share This Article">Share This</a>
+    <p class="share-links">
+      <%= mail_link @article %> <%= digg_link @article %> <%= delicious_link @article %> <%= facebook_link @article %> <%= stumble_link @article %> <%= twitter_link @article %> <%= reddit_link @article %> <%= technorati_link @article %>
+    </p>
+  </div><!-- eo:post -->
+
+
+<% if @article.allow_comments? or !@article.comments.empty? -%>
+  <div id="comments">
+    <h2>Comments</h2>
+
+<% if @article.comments.empty? -%>
+    <p class="no-comments">There are currently no comments.</p>
+<% else -%>
+    <%= comments_list @article %>
+<% end -%>
+
+<% if @article.allow_comments? %>
+    <h2 id="respond">Leave a Comment</h2>
+    <%= render :partial => 'comments/form', :locals => { :commentable => @article } %>
+<% end -%>
+  </div>
+<% end -%>
+
+</div><!-- eo:main-content -->
+
+<div id="supporting-content">
+  <h3>Latest Posts</h3>
+  <%= recent_articles %>
+  
+  <h3>Archive</h3>
+  <%= archive %>
+</div><!-- eo: supporting-content -->

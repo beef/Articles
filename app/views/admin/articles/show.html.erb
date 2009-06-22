@@ -1,0 +1,57 @@
+<h1><%= @article.new_record? ? 'New' : 'Editing' %> article</h1>
+
+<% form_for([:admin, @article], :html => {:id => 'has-assets-form'}) do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+    <%= f.label :title %><br/>
+    <%= f.text_field :title, :class => 'title' %>
+  </p>
+
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body, :class => 'editor' %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :rows => 3 %>
+  </p>
+  <p>
+    <%= f.label :tag_list %><br />
+    <%= f.text_field :tag_list, :class => 'long' %>
+  </p>
+  <p>
+    <%= f.label :category %>
+    <%= f.collection_select :category_id, Category.all, :id, :title, :prompt => true %> 
+  </p>
+  <p>
+    <%= f.label :allow_comments %><br />
+    <%= f.check_box :allow_comments %>
+  </p>
+
+  <%= publish_select(f) %>
+
+  <p class="submission">
+    <%= f.submit 'Publish', :name => 'article[publish]' %>
+    <%= f.submit 'Save as draft', :name => 'article[hide]' %>
+    or <%= link_to 'Cancel', admin_articles_path %>
+  </p>
+<% end %>
+
+
+<% content_for :sub_content do %>
+
+<div id="attach-asset-list">
+  <%= asset_list(@article) %>
+</div>
+
+<h2>File Library</h2>
+<div id="assets">
+<%= toggle_grouping_links %>
+<%= asset_browser(true) %>
+</div>
+
+<h2>File Upload</h2>
+<%= asset_upload_form %>
+
+<% end %>

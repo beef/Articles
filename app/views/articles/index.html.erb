@@ -1,0 +1,40 @@
+<% content_for 'header' do %>
+  <%= auto_discovery_link_tag :rss, {:tag => params[:tag], :page => nil, :format => 'rss'} unless params[:year] %>
+<% end %>
+
+<h1>Articles</h1>
+
+<%= link_to 'RSS', {:tag => params[:tag], :page => nil, :format => 'rss'} unless params[:year] %>
+
+
+<!-- so:main-content -->
+<div id="main-content">
+    
+  <dl id="articles">
+  <%= render :partial => @articles %>
+  </dl>
+  
+  <%= will_paginate %>
+    
+</div>
+<!-- eo:main-content -->
+
+<!-- so:supporting-content -->
+<div id="supporting-content">
+  <%= article_categories %>
+
+  <h2>Archive</h2>
+  <%= archive %>
+  
+  <h2>Latest Posts</h2>
+  <%= recent_articles %>
+  
+  <h2>Tagcloud</h2>
+  <ul class="tag-cloud">
+  <% @tags.each do |tag| %>
+    <li><%= link_to tag.name, articles_tagged_path( tag.name ), :class => "css-class-#{tag.count}" %></li>
+  <% end %>
+  </ul>
+  
+</div>
+<!-- eo:supporting-content -->

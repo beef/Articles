@@ -1,0 +1,30 @@
+<h1>Listing categories</h1>
+
+<ul class="choices">
+  <li><%= link_to 'New category', new_admin_category_path %></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <%= sortable_table_header :name => "Title",  :sort => "title" %>
+      <%= sortable_table_header :name => "Description",  :sort => "description" %>
+    </tr>
+  </thead>
+  <tbody>
+<% @categories.each do |category| %>
+    <tr id="category-<%= category.id %>">
+      <td><%= link_to category.title, admin_category_path(category) %></td>
+      <td><%=h category.description %></td>
+      <td><%= link_to 'Edit', admin_category_path(category), :class => 'edit' %></td>
+      <td><%= link_to 'Destroy', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %></td>
+    </tr>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <%= sortable_table_header :name => "Title",  :sort => "title" %>
+      <%= sortable_table_header :name => "Description",  :sort => "description" %>
+    </tr>
+  </tfoot>
+</table>

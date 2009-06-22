@@ -1,0 +1,33 @@
+<h1>Listing comments</h1>
+
+<table>
+  <thead>
+    <tr>
+<% if @commentable.nil? -%>
+      <th>Article</th>
+<% end -%>
+      <%= sortable_table_header :name => "Name",  :sort => "name" %>
+      <%= sortable_table_header :name => "Comment",  :sort => "comment" %>
+      <%= sortable_table_header :name => "Created",  :sort => "created_at" %>
+    </tr>
+  </thead>
+  <tbody>
+<% @comments.each do |comment| %>
+    <tr id="comment-<%= comment.id %>">
+<% if @commentable.nil? -%>
+      <td class="title"><%= link_to comment.commentable.title, [:admin, comment.commentable] %></td>
+<% end -%>
+      <td><%= mail_to comment.email, comment.name %></td>
+      <td><%=h comment.comment %></td>
+      <td class="date"><%= comment.created_at.to_formatted_s(:short) %></td>
+      <td><%= link_to 'Destroy', admin_comment_path(comment), :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %></td>
+    </tr>
+<% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <%= sortable_table_header :name => "Name",  :sort => "name" %>
+      <%= sortable_table_header :name => "Comment",  :sort => "comment" %>
+    </tr>
+  </tfoot>
+</table>
