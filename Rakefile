@@ -5,10 +5,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "articles"
-    gem.summary = %Q{TODO}
+    gem.summary = %Q{Article engine}
     gem.email = "steve@wearebeef.co.uk"
     gem.homepage = "http://github.com/stengland/articles"
     gem.authors = ["Steve England"]
+    gem.add_dependency( "mbleigh-acts-as-taggable-on")
+    gem.add_dependency( "jackdempsey-acts_as_commentable")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 
