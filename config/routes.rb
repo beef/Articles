@@ -1,0 +1,32 @@
+ActionController::Routing::Routes.draw do |map|
+  map.resources :comments
+
+  map.resources :categories, :has_many => :articles
+  
+  map.with_options :controller  => 'articles', :action => 'index' do |articles|
+    articles.articles_tagged 'articles/tagged/:tag'
+    articles.articles_tagged_format 'articles/tagged/:tag.:format'
+    articles.articles_authored 'articles/author/:user_id'
+    articles.articles_authored_format 'articles/author/:user_id.:format'
+    articles.articles_day 'articles/:year/:month/:day',
+      :year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/
+    articles.articles_month 'articles/:year/:month',
+      :year => /\d{4}/, :month => /\d{1,2}/
+    articles.articles_day 'articles/:year',
+      :year => /\d{4}/
+  end
+  map.article_permalink 'articles/:year/:month/:day/:permalink',
+    :controller => 'articles', :action => 'show',
+    :year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/,
+    :path_prefix => nil
+  map.resources :articles, :only => [:index], :has_many => [:comments, { :only => :create } ]
+
+  map.resources :tweets
+  map.namespace(:admin) do |admin|
+    admin.resources :categories
+    admin.resources :articles
+    admin.resources :comments, :only => [:index, :destroy]
+    admin.resources :things
+    admin.resources :blokes
+  end
+end
