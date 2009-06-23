@@ -41,15 +41,10 @@
 
 <% content_for :sub_content do %>
 
-<div id="attach-asset-list">
-  <%= asset_list(@article) %>
-</div>
+<%= asset_list(@article) %>
 
 <h2>File Library</h2>
-<div id="assets">
-<%= toggle_grouping_links %>
 <%= asset_browser(true) %>
-</div>
 
 <h2>File Upload</h2>
 <%= asset_upload_form %>
