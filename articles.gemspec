@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-06-22}
+  s.date = %q{2009-06-24}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -30,10 +30,10 @@ Gem::Specification.new do |s|
      "app/models/category.rb",
      "app/models/comment.rb",
      "app/views/admin/articles/index.html.erb",
+     "app/views/admin/articles/preview.js.rjs",
      "app/views/admin/articles/show.html.erb",
      "app/views/admin/categories/index.html.erb",
      "app/views/admin/categories/show.html.erb",
-     "app/views/admin/categories/view.html.erb",
      "app/views/admin/comments/index.html.erb",
      "app/views/articles/_article.html.erb",
      "app/views/articles/index.html.erb",
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
      "app/views/comments/_comment.html.erb",
      "app/views/comments/_form.html.erb",
      "app/views/comments/new.html.erb",
+     "articles.gemspec",
      "config/routes.rb",
      "generators/articles_migration/articles_migration_generator.rb",
      "generators/articles_migration/templates/migration.rb",

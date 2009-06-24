@@ -1,3 +1,8 @@
+<% content_for :header do %>
+  <%= javascript_include_tag 'lightwindow' %>
+  <%= stylesheet_link_tag 'lightwindow' %>
+<% end -%>
+
 <h1><%= @article.new_record? ? 'New' : 'Editing' %> article</h1>
 
 <% form_for([:admin, @article], :html => {:id => 'has-assets-form'}) do |f| %>
@@ -32,6 +37,7 @@
   <%= publish_select(f) %>
 
   <p class="submission">
+    <%= preview_link(@article) %>
     <%= f.submit 'Publish', :name => 'article[publish]' %>
     <%= f.submit 'Save as draft', :name => 'article[hide]' %>
     or <%= link_to 'Cancel', admin_articles_path %>

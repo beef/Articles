@@ -43,4 +43,13 @@ class ArticlesController < ApplicationController
       format.xml  { render :xml => @article }
     end
   end
+  
+  def preview
+    @page_class = 'show'
+    @article = Article.new(session[:article_preview])
+    @article.published_at = Time.now
+    @article.permalink = 'preview'
+    session[:article_preview] = nil
+    render :action => "show"
+  end
 end

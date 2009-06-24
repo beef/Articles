@@ -19,12 +19,12 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'articles', :action => 'show',
     :year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/,
     :path_prefix => nil
-  map.resources :articles, :only => [:index], :has_many => [:comments, { :only => :create } ]
+  map.resources :articles, :only => [:index], :collection => { :preview => :get }, :has_many => [:comments, { :only => :create } ]
 
   map.resources :tweets
   map.namespace(:admin) do |admin|
     admin.resources :categories
-    admin.resources :articles
+    admin.resources :articles, :member => { :preview => :put }, :collection => { :preview => :post }
     admin.resources :comments, :only => [:index, :destroy]
     admin.resources :things
     admin.resources :blokes

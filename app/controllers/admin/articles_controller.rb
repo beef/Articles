@@ -82,4 +82,8 @@ class Admin::ArticlesController < Admin::BaseController
       format.xml  { head :ok }
     end
   end
+  
+  def preview    
+    session[:article_study_preview] = params[:article_study]
+  end
 end
