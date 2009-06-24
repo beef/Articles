@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :comments
-
   map.resources :categories, :has_many => :articles
   
   map.with_options :controller  => 'articles', :action => 'index' do |articles|
@@ -21,12 +19,9 @@ ActionController::Routing::Routes.draw do |map|
     :path_prefix => nil
   map.resources :articles, :only => [:index], :collection => { :preview => :get }, :has_many => [:comments, { :only => :create } ]
 
-  map.resources :tweets
   map.namespace(:admin) do |admin|
     admin.resources :categories
     admin.resources :articles, :member => { :preview => :put }, :collection => { :preview => :post }
     admin.resources :comments, :only => [:index, :destroy]
-    admin.resources :things
-    admin.resources :blokes
   end
 end
