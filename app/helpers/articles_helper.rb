@@ -73,14 +73,22 @@ module ArticlesHelper
     content_tag :ul, html, options.reverse_merge!( :class => 'archive' ) unless html.empty?
   end
   
-  def related_articles(content_node)
+  def related_articles(content_node, &block)
     articles = Article.find_tagged_with content_node.tag_list, :conditions => ['published_at <= ? AND content_nodes.id != ?', Time.now, content_node.id ], :limit => 3,  :include => :created_by
-    articles_list(articles)
+    if block_given?
+      yield(articles)
+    else
+      articles_list(articles)
+    end
   end
   
-  def recent_articles(limit = 3)
+  def recent_articles(limit = 3, &block)
     articles =  Article.published.all( :limit => limit, :order => 'published_at DESC')
-    articles_list(articles)
+    if block_given?
+      yield(articles)
+    else
+      articles_list(articles)
+    end
   end
   
   def articles_list(articles)

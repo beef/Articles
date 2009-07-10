@@ -3,6 +3,7 @@ require "acts_as_commentable"
 require "articles"
 
 config.to_prepare do
+  ApplicationController.helper(ArticlesHelper)
   ApplicationController.helper(Beef::Articles)
 end
  
