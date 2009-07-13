@@ -4,6 +4,7 @@ require "articles"
 
 config.to_prepare do
   ApplicationController.helper(ArticlesHelper)
+  ApplicationController.helper(CommentsHelper)
   ApplicationController.helper(Beef::Articles)
 end
  
