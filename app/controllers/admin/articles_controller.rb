@@ -84,6 +84,6 @@ class Admin::ArticlesController < Admin::BaseController
   end
   
   def preview    
-    session[:article_study_preview] = params[:article_study]
+    session[:article_preview] = params[:article]
   end
 end
