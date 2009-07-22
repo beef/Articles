@@ -10,8 +10,8 @@ xml.rss(:version=>"2.0") do
           xml.category(article.tag_list)
           xml.description(article.description)
           xml.pubDate(article.published_at.rfc822)
-          xml.link(article_permalink(article, :only_path => false))
-          xml.guid(article_permalink(article, :only_path => false))
+          xml.link(article_url(article))
+          xml.guid(article_url(article))
         end
       end
   end

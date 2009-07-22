@@ -17,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
     :controller => 'articles', :action => 'show',
     :year => /\d{4}/, :day => /\d{1,2}/, :month => /\d{1,2}/,
     :path_prefix => nil
-  map.resources :articles, :only => [:index], :collection => { :preview => :get }, :has_many => [:comments, { :only => :create } ]
+  map.resources :articles, :only => [:index], :collection => { :preview => :get }, :has_many => :comments
 
   map.namespace(:admin) do |admin|
     admin.resources :categories
