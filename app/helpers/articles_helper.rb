@@ -16,35 +16,50 @@ module ArticlesHelper
   end
 
   def digg_link(options, html_options = {})
-    link_to 'Digg', "http://digg.com/submit?phase=2&amp;url=#{url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'digg-submit', :title => 'Digg this!')
+    link_to 'Digg', "http://digg.com/submit?phase=2&amp;url=#{server_url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'digg-submit', :title => 'Digg this!')
   end
 
   def delicious_link(options, html_options = {})
-    link_to 'delicious', "http://del.icio.us/post?url=#{url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'delicious-submit', :title => 'Save to delicious')
+    link_to 'delicious', "http://del.icio.us/post?url=#{server_url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'delicious-submit', :title => 'Save to delicious')
   end
   
   def facebook_link(options, html_options = {})
-    link_to 'Facebook', "http://www.facebook.com/sharer.php?u=#{url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'facebook-submit', :title => 'Share on Facebook')
+    link_to 'Facebook', "http://www.facebook.com/sharer.php?u=#{server_url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'facebook-submit', :title => 'Share on Facebook')
   end
   
   def stumble_link(options, html_options = {})
-    link_to 'Stumble Upon', "http://www.stumbleupon.com/submit?url=#{url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'stumble-submit', :title => 'Stumble on this')
+    link_to 'Stumble Upon', "http://www.stumbleupon.com/submit?url=#{server_url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'stumble-submit', :title => 'Stumble on this')
   end
   
   def mail_link(options, html_options = {})
-    mail_to nil, "Email", html_options.reverse_merge( :body => url_for(options), :class => 'share-link', :id => 'mail-link', :title => 'Email this to a friend')
+    mail_to nil, "Email", html_options.reverse_merge( :body => server_url_for(options), :class => 'share-link', :id => 'mail-link', :title => 'Email this to a friend')
   end
   
   def twitter_link(options, html_options = {})
-    link_to 'Twitter', "http://twitter.com/home?status=#{url_for(options)}}", html_options.reverse_merge(:class => 'share-link', :id => 'twitter-submit', :title => 'Tweet this')
+    link_to 'Twitter', "http://twitter.com/home?status=#{server_url_for(options)}}", html_options.reverse_merge(:class => 'share-link', :id => 'twitter-submit', :title => 'Tweet this')
   end
   
   def reddit_link(options, html_options = {})
-    link_to 'Reddit', "http://www.reddit.com/submit?url=#{url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'reddit-submit', :title => 'Reddit this!')
+    link_to 'Reddit', "http://www.reddit.com/submit?url=#{server_url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'reddit-submit', :title => 'Reddit this!')
   end
     
   def technorati_link(options, html_options = {})
-    link_to 'Technorati', "http://technorati.com/faves/?add=#{url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'technorati-submit', :title => 'Technorati this!')
+    link_to 'Technorati', "http://technorati.com/faves/?add=#{server_url_for(options)}", html_options.reverse_merge(:class => 'share-link', :id => 'technorati-submit', :title => 'Technorati this!')
+  end
+  
+  def server_url_for(options = {})
+    options ||= {}
+    url = case options
+    when Hash
+      options = { :only_path => true }.update(options.symbolize_keys)
+      escape  = options.key?(:escape) ? options.delete(:escape) : true
+      @controller.send(:url_for, options)
+    else
+      escape = false
+      polymorphic_url(options)
+    end
+
+    escape ? escape_once(url) : url
   end
   
   def archive(options = {} )
