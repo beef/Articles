@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
     
     @articles = Article.in_time_delta( params[:year], params[:month], params[:day] ).published.tagged_with(params[:tag], :on => :tags).authored_by(@user).categorised(@category).paginate( :page => params[:page], :per_page => params[:per_page] || 6, :order => 'published_at DESC', :include => [:created_by] )
     
-    @tags = Article.published.authored_by(params[:user_id]).categorised(@category).tag_counts
+    @tags = Article.published.authored_by(@user).categorised(@category).tag_counts
     
     respond_to do |format|
       format.html # index.html.erb
