@@ -97,8 +97,10 @@ module ArticlesHelper
     end
   end
   
-  def recent_articles(limit = 3, &block)
-    articles =  Article.published.all( :limit => limit, :order => 'published_at DESC')
+  def recent_articles(options = {}, &block)
+    options.merge!(:order => 'published_at DESC')
+    options.reverse_merge!(:limit => 3)
+    articles =  Article.published.all(options)
     if block_given?
       yield(articles)
     else
