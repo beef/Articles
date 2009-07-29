@@ -1,4 +1,5 @@
 class Admin::CategoriesController < Admin::BaseController
+  unloadable
   sortable_attributes :title, :description 
 
   # GET /categories

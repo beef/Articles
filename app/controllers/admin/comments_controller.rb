@@ -1,4 +1,5 @@
 class Admin::CommentsController < Admin::BaseController
+  unloadable
   sortable_attributes :created_at, :name, :comment
 
   def index

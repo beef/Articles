@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-
+  unloadable
+  
   def index
     @page_title = 'Articles'
     if params[:category_id]
