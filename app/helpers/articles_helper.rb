@@ -62,11 +62,10 @@ module ArticlesHelper
     escape ? escape_once(url) : url
   end
   
-  def archive(options = {} )
+  def archive(conditions = nil, html_options = {})
     this_year = params[:year] || Time.now.year
     html = ''
-   
-    all_articles = Article.find(:all, :select => 'published_at', :order => "published_at DESC", :conditions => ['published_at <= ?', Time.now ])
+    all_articles = Article.published.all(:conditions => conditions, :select => 'published_at')
     grouped_by_year = all_articles.group_by{ |a| a.published_at.year  }.sort.reverse
     grouped_by_year.each do |year, articles|
       html << '<li>'
@@ -85,7 +84,7 @@ module ArticlesHelper
       end
       html << '</li>'
     end
-    content_tag :ul, html, options.reverse_merge!( :class => 'archive' ) unless html.empty?
+    content_tag :ul, html, html_options.reverse_merge!( :class => 'archive' ) unless html.empty?
   end
   
   def related_articles(content_node, &block)
