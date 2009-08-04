@@ -5,7 +5,7 @@ require "articles"
 config.to_prepare do
   ApplicationController.helper(ArticlesHelper)
   ApplicationController.helper(CommentsHelper)
-  ApplicationController.helper(Beef::Articles)
+  ApplicationController.helper(Beef::Articles::UrlHelper)
 end
  
-ActionController::Base.send :include, Beef::Articles 
+ActionController::Base.send :include, Beef::Articles::UrlHelper 

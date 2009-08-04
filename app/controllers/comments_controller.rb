@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
                                               :comment_author_email => @comment.email,
                                               :user_logged_in => logged_in?,
                                               :referrer => request.referer,
-                                              :permalink => permalink( @commentable ))
+                                              :permalink => @commentable )
                                               
                                               
       logger.info "VIKING RESPONSE: #{viking_response.inspect}"
