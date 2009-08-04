@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @commentable }
         format.js
-        format.json { render :json => @comment.to_json(:except => [:commentable_type, :commentable_id ]), :status => :created, :location => permalink(@commentable, :anchor => "comment-#{@comment.id}") }
+        format.json { render :json => @comment.to_json(:except => [:commentable_type, :commentable_id ]), :status => :created, :location => @commentable }
       else
         format.html { render :action => 'new' }
         format.js
