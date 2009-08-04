@@ -30,7 +30,7 @@ class Admin::CategoriesController < Admin::BaseController
     @category = Category.new
 
     respond_to do |format|
-      format.html { render :action =>'show' }
+      format.html { render :action => "show" }
       format.xml  { render :xml => @category }
     end
   end
@@ -46,7 +46,7 @@ class Admin::CategoriesController < Admin::BaseController
         format.html { redirect_to(admin_categories_url) }
         format.xml  { render :xml => @category, :status => :created, :location => @category }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "show" }
         format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
       end
     end
@@ -63,7 +63,7 @@ class Admin::CategoriesController < Admin::BaseController
         format.html { redirect_to(admin_categories_url) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        format.html { render :action => "show" }
         format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
       end
     end
