@@ -28,10 +28,12 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to permalink( @commentable, :anchor => "comment-#{@comment.id}" ) }
+        format.html { redirect_to @commentable }
+        format.js
         format.json { render :json => @comment.to_json(:except => [:commentable_type, :commentable_id ]), :status => :created, :location => permalink(@commentable, :anchor => "comment-#{@comment.id}") }
       else
         format.html { render :action => 'new' }
+        format.js
         format.json { render :json => @comment.errors.full_messages, :status => :unprocessable_entity }
       end
     end
