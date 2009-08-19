@@ -27,6 +27,7 @@ class ArticlesController < ApplicationController
       format.xml { render :xml => @articles }
       format.json { render :json => @articles }
       format.rss 
+      format.js 
     end
   end
 
