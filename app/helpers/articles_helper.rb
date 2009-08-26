@@ -2,7 +2,7 @@ module ArticlesHelper
   
   def article_categories
     tabs = Category.with( :articles ).collect do |category|
-      content_tag :li, link_to( h(category.title), [category, :articles] )
+      content_tag :li, link_to( h(category.title), category_articles_path(category.permalink) )
     end
     content_tag( :h2, 'Categories' ) + content_tag( :ul, tabs.join, :class => "categories" )
   end
