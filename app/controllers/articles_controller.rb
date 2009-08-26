@@ -12,7 +12,7 @@ class ArticlesController < ApplicationController
     end
     if params[:user_id]
       @user = User.find_by_permalink(params[:user_id])
-      @page_title << " writen by 'params[:tag]'"
+      @page_title << " writen by #{@user.name}"
     end
     if params[:year]
       @page_title << " from #{params[:day]} #{Date::MONTHNAMES[params[:month].to_i] unless params[:month].nil?} #{params[:year]}"

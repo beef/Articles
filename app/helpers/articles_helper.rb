@@ -4,7 +4,14 @@ module ArticlesHelper
     tabs = Category.with( :articles ).collect do |category|
       content_tag :li, link_to( h(category.title), category_articles_path(category.permalink) )
     end
-    content_tag( :h2, 'Categories' ) + content_tag( :ul, tabs.join, :class => "categories" )
+    content_tag( :h2, 'Categories' ) + content_tag( :ul, tabs.join, :class => "categories" ) if tabs.any?
+  end
+  
+  def article_authors
+    tabs = Article.published.all(:select => 'users.name, users.permalink', :group => 'created_by_id', :joins => :created_by ).collect do |user|
+      content_tag :li, link_to( user.name, articles_authored_path(user.permalink) )
+    end
+    content_tag( :h3, 'Authors' ) + content_tag( :ul, tabs.join, :class => "authors" ) if tabs.any?
   end
   
   def comments_link(article)
