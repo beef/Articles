@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
       @page_title << " from #{params[:day]} #{Date::MONTHNAMES[params[:month].to_i] unless params[:month].nil?} #{params[:year]}"
     end
     
-    @articles = Article.in_time_delta( params[:year], params[:month], params[:day] ).published.tagged_with(params[:tag], :on => :tags).authored_by(@user).categorised(@category).paginate( :page => params[:page], :per_page => params[:per_page] || 6, :order => 'published_at DESC', :include => [:created_by] )
+    @articles = Article.in_time_delta( params[:year], params[:month], params[:day] ).published.tagged_with(params[:tag], :on => :tags).authored_by(@user).categorised(@category).paginate( :page => params[:page], :per_page => params[:per_page] || Article.per_page, :include => [:created_by] )
     
     @tags = Article.published.authored_by(@user).categorised(@category).tag_counts
     

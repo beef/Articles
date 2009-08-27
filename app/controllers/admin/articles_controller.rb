@@ -5,7 +5,7 @@ class Admin::ArticlesController < Admin::BaseController
   # GET /articles
   # GET /articles.xml
   def index
-    @articles = Article.paginate :page => params[:page], :order => sort_order(:default => 'desc')
+    @articles = Article.paginate :page => params[:page], :per_page => 20, :order => sort_order(:default => 'desc')
 
     respond_to do |format|
       format.html # index.html.erb

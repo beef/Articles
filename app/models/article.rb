@@ -25,7 +25,13 @@ class Article < ActiveRecord::Base
     { :conditions => ['published_at BETWEEN ? AND ?', from, to ] }
   }
   
+  default_scope :order => 'published_at DESC'
+  
   validates_presence_of :body, :description, :tag_list, :if => :publish
+  
+  # Default per page options
+  cattr_accessor :per_page
+  @@per_page = 10
   
   # Finds one article which was posted on a certain date and matches the supplied dashed-title
   def self.find_by_permalink(year, month, day, permalink)
