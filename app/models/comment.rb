@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  unloadable
+  
   belongs_to :commentable, :polymorphic => true
 
   acts_as_textiled :body => [:hard_breaks, :filter_html, :filter_styles]

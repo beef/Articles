@@ -1,4 +1,6 @@
 class Article < ActiveRecord::Base
+  unloadable
+  
   belongs_to :category
   
   acts_as_content_node
