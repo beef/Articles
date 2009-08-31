@@ -73,8 +73,11 @@ class Admin::CategoriesController < Admin::BaseController
   # DELETE /categories/1.xml
   def destroy
     @category = Category.find(params[:id])
-    @category.destroy
-    flash[:notice] = 'Category was successfully deleted.'
+    if @category.destroy
+      flash[:notice] = 'Category was successfully deleted.'
+    else
+      flash[:error] = 'Category could not be deleted.'
+    end
 
     respond_to do |format|
       format.html { redirect_to(admin_categories_url) }

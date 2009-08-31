@@ -9,10 +9,12 @@
 <table>
   <thead>
     <tr>
-      <%= sortable_table_header :name => "Title",  :sort => "title" %>
-      <th>Status</th>
-      <th>Author</th>
+      <%= sortable_table_header :name => "Title", :sort => "title" %>
+      <%= sortable_table_header :name => "Status",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Author",  :sort => "created_by" %>
+      <%= sortable_table_header :name => "Editor",  :sort => "updated_by" %>
       <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
+      <%= sortable_table_header :name => "Created",  :sort => "created_at" %>
       <%= sortable_table_header :name => "Published At",  :sort => "published_at" %>
       <%= sortable_table_header :name => "Published To",  :sort => "published_to" %>
       <th colspan="3">Actions</th>
@@ -24,7 +26,9 @@
       <td><%= link_to h( article.title ), admin_article_path(article) %></td>
       <td><%= content_status(article) %></td>
       <td><%= article.author %></td>
+      <td><%= article.editor %></td>
       <td><%= article.updated_at.strftime('%d %b') %></td>
+      <td><%= article.created_at.strftime('%d %b') %></td>
       <td><%= article.published_at.strftime('%d %b') unless article.published_at.nil? %></td>
       <td><%= article.published_to.strftime('%d %b') unless article.published_to.nil? %></td>
       <td><%= link_to 'Show', article_url(article), :class => 'show' if article.published? %></td>
@@ -35,10 +39,12 @@
   </tbody>
   <tfoot>
     <tr>
-      <%= sortable_table_header :name => "Title",  :sort => "title" %>
-      <th>Status</th>
-      <th>Author</th>
+      <%= sortable_table_header :name => "Title", :sort => "title" %>
+      <%= sortable_table_header :name => "Status",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Author",  :sort => "created_by" %>
+      <%= sortable_table_header :name => "Editor",  :sort => "updated_by" %>
       <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
+      <%= sortable_table_header :name => "Created",  :sort => "created_at" %>
       <%= sortable_table_header :name => "Published At",  :sort => "published_at" %>
       <%= sortable_table_header :name => "Published To",  :sort => "published_to" %>
       <th colspan="3">Actions</th>

@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-08-27}
+  s.date = %q{2009-08-31}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -49,6 +49,8 @@ Gem::Specification.new do |s|
      "lib/articles.rb",
      "rails/init.rb",
      "test/articles_test.rb",
+     "test/database.yml",
+     "test/schema.rb",
      "test/test_helper.rb"
   ]
   s.homepage = %q{http://github.com/beef/articles}
@@ -58,6 +60,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Article/Blogging engine}
   s.test_files = [
     "test/articles_test.rb",
+     "test/schema.rb",
      "test/test_helper.rb"
   ]
 

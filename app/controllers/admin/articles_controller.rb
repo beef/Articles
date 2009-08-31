@@ -1,6 +1,6 @@
 class Admin::ArticlesController < Admin::BaseController
   unloadable
-  sortable_attributes :published_at, :title, :permalink, :published_to, :body, :description, :allow_comments 
+  sortable_attributes :created_at, :published_at, :title, :permalink, :published_to, :body, :description, :allow_comments, :created_by => 'created_by.name' 
 
   # GET /articles
   # GET /articles.xml
