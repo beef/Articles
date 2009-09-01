@@ -12,14 +12,9 @@
     </p>
     <%= @article.body %>
   
-    <% unless @article.assets.documents.empty? -%>
-    <ul>
-      <% for document in @article.assets.documents %>
-        <li><%= link_to document.filename %></li>
-      <% end %>
-    </ul>
-    <% end -%>
-
+    <%= gallery @article.assets %>
+    <%= documents @article.assets %>
+    
     <a href="#" id="share-title" title="Share This Article">Share This</a>
     <p class="share-links">
       <%= mail_link @article %> <%= digg_link @article %> <%= delicious_link @article %> <%= facebook_link @article %> <%= stumble_link @article %> <%= twitter_link @article %> <%= reddit_link @article %> <%= technorati_link @article %>
