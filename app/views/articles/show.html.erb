@@ -1,28 +1,24 @@
 <% content_for 'header' do %>
   <%= auto_discovery_link_tag :rss, articles_path(:rss) %>
 <% end %>
+<h1><%=h @article.title %></h1>
+<%= link_to 'RSS', articles_path(:rss), :class => 'rss' %>
 
 <div id="main-content">
-  <h1>News</h1>
-  <%= link_to 'RSS', articles_path(:rss), :class => 'rss' %>
-  <div class="post">
-    <h2><%=h @article.title %></h2>
-    <p class="post-meta">
-      on <span class="date"><%= @article.published_at.to_formatted_s(:short_dot) %></span> by <%= link_to @article.author, articles_authored_path(@article.created_by.permalink) %>
-    </p>
-    <%= @article.body %>
+  <p class="post-meta">
+    on <span class="date"><%= @article.published_at.to_formatted_s(:short_dot) %></span> by <%= link_to @article.author, articles_authored_path(@article.created_by.permalink) %>
+  </p>
+  <%= @article.body %>
+
+  <%= gallery @article.assets %>
+  <%= documents @article.assets %>
   
-    <%= gallery @article.assets %>
-    <%= documents @article.assets %>
-    
-    <a href="#" id="share-title" title="Share This Article">Share This</a>
-    <p class="share-links">
-      <%= mail_link @article %> <%= digg_link @article %> <%= delicious_link @article %> <%= facebook_link @article %> <%= stumble_link @article %> <%= twitter_link @article %> <%= reddit_link @article %> <%= technorati_link @article %>
-    </p>
-  </div><!-- eo:post -->
+  <a href="#" id="share-title" title="Share This Article">Share This</a>
+  <p class="share-links">
+    <%= mail_link @article %> <%= digg_link @article %> <%= delicious_link @article %> <%= facebook_link @article %> <%= stumble_link @article %> <%= twitter_link @article %> <%= reddit_link @article %> <%= technorati_link @article %>
+  </p>
 
-
-<% if @article.allow_comments? or !@article.comments.empty? -%>
+<% if @article.allow_comments? or @article.comments.any? -%>
   <div id="comments">
     <h2>Comments</h2>
 
@@ -36,15 +32,22 @@
     <h2 id="respond">Leave a Comment</h2>
     <%= render :partial => 'comments/form', :locals => { :commentable => @article } %>
 <% end -%>
-  </div>
+  </div><!-- eo:comments -->
 <% end -%>
 
 </div><!-- eo:main-content -->
 
 <div id="sidebar">
-  <h3>Latest Posts</h3>
-  <%= recent_articles %>
+  <%= related_articles(@article) %>
   
-  <h3>Archive</h3>
+  <h2>Latest Posts</h2>
+  <%= recent_articles %>
+    
+  <%= article_categories %>
+  
+  <%= article_authors %>
+  
+  <h2>Archive</h2>
   <%= archive %>
-</div><!-- eo: supporting-content -->
+
+</div><!-- eo:sidebar -->

@@ -11,7 +11,7 @@ module ArticlesHelper
     tabs = Article.published.all(:select => 'users.name, users.permalink', :group => 'created_by_id', :joins => :created_by ).collect do |user|
       content_tag :li, link_to( user.name, articles_authored_path(user.permalink) )
     end
-    content_tag( :h3, 'Authors' ) + content_tag( :ul, tabs.join, :class => "authors" ) if tabs.any?
+    content_tag( :h2, 'Authors' ) + content_tag( :ul, tabs.join, :class => "authors" ) if tabs.any?
   end
   
   def comments_link(article)
@@ -94,17 +94,17 @@ module ArticlesHelper
     content_tag :ul, html, html_options.reverse_merge!( :class => 'archive' ) unless html.empty?
   end
   
-  def related_articles(content_node, &block)
-    articles = Article.find_tagged_with content_node.tag_list, :conditions => ['published_at <= ? AND content_nodes.id != ?', Time.now, content_node.id ], :limit => 3,  :include => :created_by
+  def related_articles(taggable, &block)
+    articles = Article.published.all(taggable.related_search_options(:tags, Article, :limit => 3))
+    return if articles.empty?
     if block_given?
       yield(articles)
     else
-      articles_list(articles)
+      content_tag(:div, content_tag( :h2, 'Related' ) + articles_list(articles), :class => "related")
     end
   end
   
   def recent_articles(options = {}, &block)
-    options.merge!(:order => 'published_at DESC')
     options.reverse_merge!(:limit => 3)
     articles =  Article.published.all(options)
     if block_given?
@@ -116,7 +116,7 @@ module ArticlesHelper
   
   def articles_list(articles)
     return if articles.empty?
-    articles.collect! { |article| content_tag( 'li', "#{link_to(article.title, article)}")    }
+    articles.collect! { |article| content_tag( 'li', "#{link_to(article.title, article)} #{article.published_at.to_formatted_s(:short_dot)}")    }
     content_tag( 'ul', articles.join, :class => 'article-list' )
   end
   
