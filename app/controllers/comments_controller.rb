@@ -8,14 +8,15 @@ class CommentsController < ApplicationController
     
     @comment = @commentable.comments.build(params[:comment])
     
-    unless Settings.defensio_api_key.blank?
+    if defined?( Viking ) and !Settings.defensio_api_key.blank? 
+      viking = Viking.connect(:defensio, :api_key => Settings.defensio_api_key, :blog => root_url)
       viking_response = viking.check_comment( :user_ip => request.remote_ip,
                                               :article_date => @commentable.published_at,
-                                              :comment_author => @comment.author,
+                                              :comment_author => @comment.name,
                                               :comment_type => 'comment',
                                               :comment_content => @comment.comment,
                                               :comment_author_email => @comment.email,
-                                              :user_logged_in => logged_in?,
+                                              :user_logged_in => signed_in?,
                                               :referrer => request.referer,
                                               :permalink => @commentable )
                                               
