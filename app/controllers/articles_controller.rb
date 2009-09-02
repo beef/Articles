@@ -49,7 +49,9 @@ class ArticlesController < ApplicationController
   def preview
     @page_class = 'show'
     @article = Article.new(session[:article_preview])
+    @article.id = 0
     @article.published_at = Time.now
+    @article.created_by = current_user
     @article.permalink = 'preview'
     session[:article_preview] = nil
     render :action => "show"
