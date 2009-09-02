@@ -21,7 +21,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace(:admin) do |admin|
     admin.resources :categories
-    admin.resources :articles, :member => { :preview => :put }, :collection => { :preview => :post }
+    admin.resources :articles, :has_many => :comments, :member => { :preview => :put }, :collection => { :preview => :post }
     admin.resources :comments, :only => [:index, :destroy]
   end
 end

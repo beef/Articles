@@ -1,4 +1,4 @@
-<h1>Listing comments</h1>
+<h1>Listing comments<%= " for \"#{@commentable.title}\"" if @commentable -%></h1>
 
 <table>
   <thead>
@@ -9,6 +9,7 @@
       <%= sortable_table_header :name => "Name",  :sort => "name" %>
       <%= sortable_table_header :name => "Comment",  :sort => "comment" %>
       <%= sortable_table_header :name => "Created",  :sort => "created_at" %>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -28,6 +29,8 @@
     <tr>
       <%= sortable_table_header :name => "Name",  :sort => "name" %>
       <%= sortable_table_header :name => "Comment",  :sort => "comment" %>
+      <%= sortable_table_header :name => "Created",  :sort => "created_at" %>
+      <th>Actions</th>
     </tr>
   </tfoot>
 </table>
