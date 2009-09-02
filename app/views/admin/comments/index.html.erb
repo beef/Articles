@@ -27,6 +27,9 @@
   </tbody>
   <tfoot>
     <tr>
+<% if @commentable.nil? -%>
+      <th>Article</th>
+<% end -%>
       <%= sortable_table_header :name => "Name",  :sort => "name" %>
       <%= sortable_table_header :name => "Comment",  :sort => "comment" %>
       <%= sortable_table_header :name => "Created",  :sort => "created_at" %>
