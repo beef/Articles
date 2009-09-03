@@ -9,8 +9,11 @@
     on <span class="date"><%= @article.published_at.to_formatted_s(:short_dot) %></span> by <%= link_to @article.author, articles_authored_path(@article.created_by.permalink) %>
   </p>
   <%= @article.body %>
-
+  
+  <h3>Gallery</h3>
   <%= gallery @article.assets %>
+
+  <h3>Documents</h3>
   <%= documents @article.assets %>
   
   <a href="#" id="share-title" title="Share This Article">Share This</a>
