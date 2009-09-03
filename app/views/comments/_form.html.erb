@@ -1,25 +1,25 @@
 <% form_for([commentable, (@comment || Comment.new)], :html => {:id=>"comment-form"} ) do |f| %>
 <%= f.error_messages %>
 <p>
-  <%= f.label :name, "Name" %><br/>
+  <%= f.label :name, "Name*" %>
   <%= f.text_field :name %>
 </p>
 
 <p>
-  <%= f.label :email %><br/>
+  <%= f.label :email, "Email*" %>
   <%= f.text_field :email %>
 </p>
 
 <p>
-  <%= f.label :website, 'Website' %><br/>
+  <%= f.label :website, 'Website' %>
   <%= f.text_field :website %>
 </p>
 
 <p>
-  <%= f.label :comment, "Comment" %><br/>
+  <%= f.label :comment, "Comment*" %>
   <%= f.text_area :comment, :rows => 5 %>
 </p>
 
-<p class="buttons"><%= f.submit 'Submit', :id => 'submit' %></p>
+<p class="buttons"><%= f.submit 'Submit', :class => 'f-submit', :id => 'submit' %></p>
 
 <% end -%>
