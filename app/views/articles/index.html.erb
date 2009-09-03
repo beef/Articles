@@ -4,7 +4,7 @@
 
 <h1>Articles</h1>
 
-<%= link_to 'RSS', {:tag => params[:tag], :page => nil, :format => 'rss', :class => 'rss'} unless params[:year] %>
+<%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
 
 
 <!-- so:main-content -->
