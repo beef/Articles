@@ -1,6 +1,6 @@
 <!-- so:post -->
 <dt>
-  <%= link_to h(article.title), article %>
+  <%= link_to h(article.title), article %><br/><br/>
   <%= link_to(image_tag(article.assets.images.first.public_filename(:medium)), article) unless article.assets.images.first.nil? %>
 </dt>
 <dd>
