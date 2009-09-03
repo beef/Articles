@@ -21,7 +21,7 @@
 <% if @article.allow_comments? or @article.comments.any? -%>
   <div id="comments">
     <h2>Comments</h2>
-
+    
 <% if @article.comments.empty? -%>
     <p class="no-comments">There are currently no comments.</p>
 <% else -%>
@@ -30,6 +30,7 @@
 
 <% if @article.allow_comments? %>
     <h2 id="respond">Leave a Comment</h2>
+    <p>*Required fields</p>
     <%= render :partial => 'comments/form', :locals => { :commentable => @article } %>
 <% end -%>
   </div><!-- eo:comments -->
