@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{articles}
-  s.version = "0.3.25"
+  s.version = "0.3.26"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Steve England"]
-  s.date = %q{2009-09-03}
+  s.date = %q{2009-09-04}
   s.email = %q{steve@wearebeef.co.uk}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -63,8 +63,8 @@ Gem::Specification.new do |s|
   s.summary = %q{Article/Blogging engine}
   s.test_files = [
     "test/articles_test.rb",
-     "test/schema.rb",
-     "test/test_helper.rb"
+     "test/test_helper.rb",
+     "test/schema.rb"
   ]
 
   if s.respond_to? :specification_version then
