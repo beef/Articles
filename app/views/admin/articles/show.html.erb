@@ -3,7 +3,7 @@
   <%= stylesheet_link_tag 'lightwindow' %>
 <% end -%>
 
-<h1><%= @article.new_record? ? 'New' : 'Editing' %> article</h1>
+<h1><%= @article.new_record? ? 'New' : 'Editing an' %> Article</h1>
 
 <% form_for([:admin, @article], :html => {:id => 'has-assets-form'}) do |f| %>
   <%= f.error_messages %>

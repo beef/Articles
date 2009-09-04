@@ -1,4 +1,4 @@
-<h1><%= @category.new_record? ? 'New' : 'Editing' %> category</h1>
+<h1><%= @category.new_record? ? 'New' : 'Editing a' %> Category</h1>
 
 <% form_for([:admin, @category]) do |f| %>
   <%= f.error_messages %>
