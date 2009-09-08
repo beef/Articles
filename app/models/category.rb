@@ -1,6 +1,4 @@
 class Category < ActiveRecord::Base
-  unloadable
-  
   has_many :articles
   
   validates_presence_of :title
