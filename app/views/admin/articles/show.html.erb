@@ -9,20 +9,20 @@
   <%= f.error_messages %>
   
   <p>
-    <%= f.label :title %><br/>
+    <%= f.label :title, 'Title*' %><br/>
     <%= f.text_field :title, :class => 'title' %>
   </p>
 
   <p>
-    <%= f.label :body %><br />
+    <%= f.label :body, 'Body*' %><br />
     <%= f.text_area :body, :class => 'editor' %>
   </p>
   <p>
-    <%= f.label :description %><br />
+    <%= f.label :description, 'Description*' %><br />
     <%= f.text_area :description, :rows => 3 %>
   </p>
   <p>
-    <%= f.label :tag_list %><br />
+    <%= f.label :tag_list, 'Keywords (used by search engines) & Tags - comma seperated*' %><br />
     <%= f.text_field :tag_list, :class => 'long' %>
   </p>
   <p>
