@@ -1,4 +1,4 @@
 <li id="comment-<%= comment.id %>">
   <span class="comment"><%= sanitize comment.comment, :tags => Settings.allowed_html_tags_for_UGC.to_s.split(' '), :attributes => Settings.allowed_html_attributes_for_UGC.to_s.split(' ') %></span>
-  <%= link_to comment.created_at.to_formatted_s(:short_dot), article_url(commentable, :anchor => "comment-#{comment.id}"), :title => "Permalink to this comment" %> | posted by <%= link_to_unless comment.website.blank?, comment.name, "http://#{comment.website}" %>
+  <%= link_to comment.created_at.to_formatted_s(:short_dot), "#{url_for(comment.commentable)}#comment-#{comment.id}", :title => "Permalink to this comment" %> | posted by <%= link_to_unless comment.website.blank?, comment.name, "http://#{comment.website}" %>
 </li>
