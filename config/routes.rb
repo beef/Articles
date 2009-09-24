@@ -4,8 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller  => 'articles', :action => 'index' do |articles|
     articles.articles_tagged 'articles/tagged/:tag'
     articles.articles_tagged_format 'articles/tagged/:tag.:format'
-    articles.articles_authored 'articles/author/:user_id'
-    articles.articles_authored_format 'articles/author/:user_id.:format'
+    articles.articles_authored 'articles/author/:permalink'
+    articles.articles_authored_format 'articles/author/:permalink.:format'
     articles.articles_day 'articles/:year/:month/:day',
       :year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/
     articles.articles_month 'articles/:year/:month',

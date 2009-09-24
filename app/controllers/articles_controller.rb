@@ -10,8 +10,8 @@ class ArticlesController < ApplicationController
     if params[:tag]
       @page_title << " tagged with '#{params[:tag]}'"
     end
-    if params[:user_id]
-      @user = User.find_by_permalink(params[:user_id])
+    if params[:permalink]
+      @user = User.find_by_permalink(params[:permalink])
       @page_title << " writen by #{@user.name}"
     end
     if params[:year]
