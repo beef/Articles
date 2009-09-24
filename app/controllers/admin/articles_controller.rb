@@ -84,7 +84,9 @@ class Admin::ArticlesController < Admin::BaseController
     end
   end
   
-  def preview    
-    session[:article_preview] = params[:article]
+  def preview
+    @article = Article.find(params[:id])
+    @article.attributes = params[:article]
+    session[:article_preview] = @article.attributes
   end
 end
