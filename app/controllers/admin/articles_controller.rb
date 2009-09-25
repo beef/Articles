@@ -85,8 +85,13 @@ class Admin::ArticlesController < Admin::BaseController
   end
   
   def preview
-    @article = Article.find(params[:id])
-    @article.attributes = params[:article]
+    unless params[:id].nil?
+      @article = Article.find(params[:id])
+      @article.attributes = params[:article]
+    else
+      @article = Article.new(params[:article])
+    end
+
     session[:article_preview] = @article.attributes
   end
 end
