@@ -1,11 +1,11 @@
 class Admin::ArticlesController < Admin::BaseController
   unloadable
-  sortable_attributes :created_at, :published_at, :title, :permalink, :published_to, :body, :description, :allow_comments, :created => 'created_by.name', :updated => 'updated_by.name' 
+  sortable_attributes :created_at, :published_at, :title, :permalink, :published_to, :body, :description, :allow_comments, :created => 'users.name', :updated => 'updated_bies_articles.name' 
 
   # GET /articles
   # GET /articles.xml
   def index
-    @articles = Article.paginate :page => params[:page], :per_page => 20, :order => sort_order(:default => 'desc')
+    @articles = Article.paginate :page => params[:page], :per_page => 20, :order => sort_order(:default => 'desc'), :include => [:created_by, :updated_by]
 
     respond_to do |format|
       format.html # index.html.erb
