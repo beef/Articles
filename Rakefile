@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "articles"
+    gem.name = "beef-articles"
     gem.summary = %Q{Article/Blogging engine}
     gem.email = "steve@wearebeef.co.uk"
     gem.homepage = "http://github.com/beef/articles"
@@ -13,7 +13,7 @@ begin
     gem.add_dependency( "jackdempsey-acts_as_commentable")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
-
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
