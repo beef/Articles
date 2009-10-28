@@ -76,7 +76,7 @@ class Admin::CategoriesController < Admin::BaseController
     if @category.destroy
       flash[:notice] = 'Category was successfully deleted.'
     else
-      flash[:error] = 'Category could not be deleted as ithas content associated with it'
+      flash[:error] = 'Category could not be deleted as it has content associated with it'
     end
 
     respond_to do |format|
