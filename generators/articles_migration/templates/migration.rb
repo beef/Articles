@@ -30,6 +30,7 @@ class CreateArticlesCategoriesAndComments < ActiveRecord::Migration
       t.string :website, :default => ""
       t.string :name, :default => ""
       t.string :email, :default => ""
+      t.string :spam_signature
       t.timestamps
     end
 

@@ -8,9 +8,8 @@ class CommentsController < ApplicationController
     
     @comment = @commentable.comments.build(params[:comment])
     
-    if defined?( Viking ) and !Settings.defensio_api_key.blank? 
-      viking = Viking.connect(:defensio, :api_key => Settings.defensio_api_key, :blog => root_url)
-      viking_response = viking.check_comment( :user_ip => request.remote_ip,
+    if defined?( Viking )
+      viking_response = Viking.check_comment( :user_ip => request.remote_ip,
                                               :article_date => @commentable.published_at,
                                               :comment_author => @comment.name,
                                               :comment_type => 'comment',
@@ -20,9 +19,14 @@ class CommentsController < ApplicationController
                                               :referrer => request.referer,
                                               :permalink => @commentable )
                                               
-                                              
-      logger.info "VIKING RESPONSE: #{viking_response.inspect}"
-      @comment.spam_filter = !viking_response[:spam]
+      if viking_response                                        
+        logger.info "VIKING RESPONSE: #{viking_response.inspect}"
+        @comment.spam_filter = !viking_response[:spam]
+        @comment.spam_signature = viking_response[:signature] if @comment.respond_to?(:spam_signature)
+      else
+        logger.warn "VIKING OPTIONS INCORRECT"
+        @comment.spam_filter = true
+      end
     else
       @comment.spam_filter = true
     end
