@@ -20,6 +20,9 @@ class Admin::CommentsController < Admin::BaseController
 
   def destroy
     @comment = Comment.find(params[:id])
+    if spam_markable? and params[:spam]
+      Viking.mark_as_spam(@comment.spam_signature)
+    end
     @comment.destroy
     flash[:notice] = 'Comment was successfully deleted.'
 
@@ -28,4 +31,11 @@ class Admin::CommentsController < Admin::BaseController
       format.xml  { head :ok }
     end
   end
+  
+protected
+  
+  def spam_markable?
+    @spam_markable ||= defined?( Viking ) and Comment.new.respond_to?(:spam_signature)
+  end
+  helper_method :spam_markable?
 end
