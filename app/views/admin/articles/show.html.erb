@@ -25,7 +25,7 @@
     <%= f.label :tag_list, 'Keywords (used by search engines) & Tags - comma separated*' %><br />
     <%= f.text_field :tag_list, :class => 'long' %>
   </p>
-<% if Category.any? %>
+<% if Category.exists? %>
   <p>
     <%= f.label :category %>
     <%= f.collection_select :category_id, Category.all, :id, :title, :prompt => true %> 
