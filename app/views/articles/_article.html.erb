@@ -5,7 +5,7 @@
 </dt>
 <dd>
   <p class="post-meta">
-    <span class="date"><%= article.published_at.to_formatted_s(:short_dot) %></span> | posted by <%= link_to article.author, articles_authored_path(article.created_by.permalink) %>
+    <span class="date"><%= article.published_at.to_formatted_s(:short_dot) %></span> | posted by <%= link_to_unless article.created_by.nil?, article.author, articles_authored_path( (article.created_by.nil? ? '' : article.created_by.permalink) ) %>
   </p>
   <p><%=h article.description %></p>
 </dd>
