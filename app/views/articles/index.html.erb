@@ -1,11 +1,26 @@
+<% @page_title = @category.title.titleize %>
+<% @page_id = @category.permalink if @category %>
+
 <% content_for 'header' do %>
   <%= auto_discovery_link_tag :rss, {:tag => params[:tag], :page => nil, :format => 'rss'} unless params[:year] %>
 <% end %>
 
-<h1>Articles</h1>
 
-<%= link_to('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
-
+<div id="supporting-content">
+  <% unless @category.nil? %>
+  <% if @category.permalink == "inside" %>
+  <% @header_class = 'bg3' %>
+    <h2>boothfilms is&hellip;</h2>
+    <%= TextElement.booth_films_is 'home' %>
+    <%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
+  <% else %>
+  <% @header_class = 'bg5' %>
+    <h2>Archive</h2>
+      <%= archive %>
+      <%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
+  <% end %>
+  <% end %>
+</div>
 
 <!-- so:main-content -->
 <div id="main-content">
@@ -14,28 +29,7 @@
   <%= render :partial => @articles %>
   </dl>
   
-  <%= will_paginate %>
+  <%= will_paginate(:previous_label => 'previous', :next_label => 'next') %>
     
 </div>
 <!-- eo:main-content -->
-
-<!-- so:supporting-content -->
-<div id="sidebar">
-  <%= article_categories %>
-  <%= article_authors %>
-
-  <h2>Archive</h2>
-  <%= archive %>
-  
-  <h2>Latest Posts</h2>
-  <%= recent_articles %>
-  
-  <h2>Tagcloud</h2>
-  <ul class="tag-cloud">
-  <% @tags.each do |tag| %>
-    <li><%= link_to tag.name, articles_tagged_path( tag.name ), :class => "css-class-#{tag.count}" %></li>
-  <% end %>
-  </ul>
-  
-</div>
-<!-- eo:supporting-content -->

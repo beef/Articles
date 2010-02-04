@@ -1,22 +1,35 @@
+<% @page_id = @article.category.permalink if @article.category %>
+
 <% content_for 'header' do %>
   <%= auto_discovery_link_tag :rss, articles_path(:rss) %>
 <% end %>
-<h1><%=h @article.title %></h1>
-<%= link_to 'RSS', articles_path(:rss), :class => 'rss' %>
+
+<div id="supporting-content">
+  <% unless @article.category.nil? %>
+  <% if @article.category.permalink == "inside" %>
+    <h2>boothfilms is&hellip;</h2>
+    <%= TextElement.booth_films_is 'home' %>
+    <%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
+  <% else %>
+    <h2>Archive</h2>
+      <%= archive %>
+      <%= link_to 'back', category_articles_path(@article.category.permalink), :class => 'back' %>
+  <% end %>
+  <% end %>
+</div>
+
 
 <div id="main-content">
-  <p class="post-meta">
-    on <span class="date"><%= @article.published_at.to_formatted_s(:short_dot) %></span> by <%= link_to @article.author, articles_authored_path(@article.created_by.permalink) %>
-  </p>
+  <h1><%=h @article.title %></h1>
   <%= @article.body %>
   
-  <h3>Gallery</h3>
+  <%= render :partial => 'meta', :locals => {:article => @article } %>
+  
   <%= gallery @article.assets %>
 
-  <h3>Documents</h3>
   <%= documents @article.assets %>
   
-  <a href="#" id="share-title" title="Share This Article">Share This</a>
+  <h4 id="share-title" title="Share This Article">Share This</h4>
   <p class="share-links">
     <%= mail_link @article %> <%= digg_link @article %> <%= delicious_link @article %> <%= facebook_link @article %> <%= stumble_link @article %> <%= twitter_link @article %> <%= reddit_link @article %> <%= technorati_link @article %>
   </p>
@@ -33,7 +46,6 @@
 
 <% if @article.allow_comments? %>
     <h2 id="respond">Leave a Comment</h2>
-    <p>*Required fields</p>
     <%= render :partial => 'comments/form', :locals => { :commentable => @article } %>
 <% end -%>
   </div><!-- eo:comments -->
@@ -41,17 +53,3 @@
 
 </div><!-- eo:main-content -->
 
-<div id="sidebar">
-  <%= related_articles(@article) %>
-  
-  <h2>Latest Posts</h2>
-  <%= recent_articles %>
-    
-  <%= article_categories %>
-  
-  <%= article_authors %>
-  
-  <h2>Archive</h2>
-  <%= archive %>
-
-</div><!-- eo:sidebar -->
