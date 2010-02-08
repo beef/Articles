@@ -1,25 +1,12 @@
-<% @page_title = @category.title.titleize %>
-<% @page_id = @category.permalink if @category %>
-
 <% content_for 'header' do %>
   <%= auto_discovery_link_tag :rss, {:tag => params[:tag], :page => nil, :format => 'rss'} unless params[:year] %>
 <% end %>
 
 
 <div id="supporting-content">
-  <% unless @category.nil? %>
-  <% if @category.permalink == "inside" %>
-  <% @header_class = 'bg3' %>
-    <h2>boothfilms is&hellip;</h2>
-    <%= TextElement.booth_films_is 'home' %>
-    <%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
-  <% else %>
-  <% @header_class = 'bg5' %>
     <h2>Archive</h2>
-      <%= archive %>
-      <%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
-  <% end %>
-  <% end %>
+    <%= archive %>
+    <%= link_to ('RSS', {:tag => params[:tag], :page => nil, :format => 'rss'}, :class => 'rss') unless params[:year] %>
 </div>
 
 <!-- so:main-content -->

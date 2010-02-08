@@ -4,8 +4,8 @@
 </dt>
 <dd>
   <%= "#{link_to(image_tag(article.assets.images.first.public_filename(:thumb)), article)}" unless article.assets.images.first.nil? %>
-  <p class="description"><%=h truncate(article.description, :length => 250) %> <%= link_to "(more)", article %></p>
-  <% if @category.permalink == "flipside" %>
+  <p class="description"><%=h truncate(article.description, :length => 250) %> <%= link_to "(more)", article_path(article.permalink) %></p>
+  <% if article.allow_comments %>
     <p><%= article.comments.count %> <%= link_to 'Leave a comment', article_path(article, :anchor => 'respond') %></p>
   <% end %>    
     
