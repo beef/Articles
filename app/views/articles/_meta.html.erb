@@ -1,3 +1,7 @@
 <p class="post-meta">
-    Posted by <%= article.author %> on <%= article.published_at.to_formatted_s(:short_dot) %> by <%= link_to article.author, articles_authored_path(article.updated_by.permalink) %> 
+  <% if article.comments.any? or article.allow_comments? %>
+    <span class="comment"><%= pluralize( article.comments.count, 'Comment' )%></span> |
+    <%= link_to 'Leave a comment', article_path(article, :anchor => 'respond') %> |
+  <% end -%>
+  Posted by <%= article.author %> on <span class="date"><%= article.published_at.to_formatted_s(:short_dot) %></span>
 </p>
