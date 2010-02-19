@@ -85,13 +85,9 @@ class Admin::ArticlesController < Admin::BaseController
   end
   
   def preview
-    unless params[:id].nil?
-      @article = Article.find(params[:id])
-      @article.attributes = params[:article]
-    else
-      @article = Article.new(params[:article])
-    end
-
-    session[:article_preview] = @article.attributes
+    preview_params = params[:news_article]
+    article = Article.find_by_id(params[:id])
+    preview_params.reverse_merge!(article.attributes) if article
+    session[:article_preview] = preview_params
   end
 end

@@ -33,6 +33,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.published.find_by_permalink(params[:year], params[:month], params[:day], params[:permalink])
+    @images = @article.assets.images
+    @documents = @article.assets.documents
     
     @page_title = @article.title
     @page_description = @article.description
@@ -49,6 +51,11 @@ class ArticlesController < ApplicationController
   def preview
     @page_class = 'show'
     @article = Article.new(session[:article_preview])
+    @images = Asset.images.all(:conditions => {:id => session[:article_preview][:asset_ids] })
+    @documents = Asset.documents.all(:conditions => {:id => session[:article_preview][:asset_ids] })
+
+RAILS_DEFAULT_LOGGER.debug session[:article_preview].inspect
+
     @article.id = 0
     @article.published_at = Time.now
     @article.created_by = current_user
