@@ -85,7 +85,7 @@ class Admin::ArticlesController < Admin::BaseController
   end
   
   def preview
-    preview_params = params[:news_article]
+    preview_params = params[:article]
     article = Article.find_by_id(params[:id])
     preview_params.reverse_merge!(article.attributes) if article
     session[:article_preview] = preview_params
