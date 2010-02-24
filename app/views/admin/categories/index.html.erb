@@ -17,8 +17,8 @@
     <tr id="category-<%= category.id %>">
       <td><%= link_to category.title, admin_category_path(category) %></td>
       <td><%=h category.description %></td>
-      <td class="action"><%= link_to 'Edit', admin_category_path(category), :class => 'edit' %></td>
-      <td class="action"><%= link_to 'Destroy', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete, :class => 'delete' %></td>
+      <td class="action"><%= link_to 'Edit', admin_category_path(category), :class => 'edit', :title => 'Edit this category' %></td>
+      <td class="action"><%= link_to 'Delete', admin_category_path(category), :confirm => 'Are you sure?', :method => :delete, :class => 'delete', :title => 'Delete this category' %></td>
     </tr>
 <% end %>
   </tbody>
