@@ -6,6 +6,6 @@
   <%= "#{link_to(image_tag(article.assets.images.first.public_filename(:thumb)), article)}" unless article.assets.images.first.nil? %>
   <p class="description"><%=h truncate(article.description, :length => 250) %> <%= link_to "(more)", article_path(article) %></p>
 
-  <%= render :partial => 'meta', :locals => {:article => article } %>
+  <%= render :partial => 'articles/meta', :locals => {:article => article } %>
 </dd>
 <!-- eo:post -->
