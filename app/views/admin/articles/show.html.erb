@@ -42,7 +42,7 @@
     <%= preview_link(@article) %>
     <%= f.submit 'Publish', :name => 'article[publish]' %>
     <%= f.submit 'Save as draft', :name => 'article[hide]' %>
-    or <%= link_to 'Cancel', admin_articles_path %>
+    or <%= link_to 'Cancel', admin_articles_path, :title => 'Stop editing and return to view all articles' %>
   </p>
 <% end %>
 
