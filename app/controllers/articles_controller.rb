@@ -51,8 +51,9 @@ class ArticlesController < ApplicationController
   def preview
     @page_class = 'show'
     @article = Article.new(session[:article_preview])
-    @images = Asset.images.all(:conditions => {:id => session[:article_preview][:asset_ids] })
-    @documents = Asset.documents.all(:conditions => {:id => session[:article_preview][:asset_ids] })
+    asset_ids = session[:article_preview][:asset_ids]
+    @images = Asset.images.all(:conditions => {:id => asset_ids }).sort{|x,y| asset_ids.index(y.id.to_s) <=> asset_ids.index(x.id.to_s) }.reverse
+    @documents = Asset.documents.all(:conditions => {:id => asset_ids }).sort{|x,y| asset_ids.index(y.id.to_s) <=> asset_ids.index(x.id.to_s) }.reverse
 
 RAILS_DEFAULT_LOGGER.debug session[:article_preview].inspect
 
