@@ -55,8 +55,6 @@ class ArticlesController < ApplicationController
     @images = Asset.images.all(:conditions => {:id => asset_ids }).sort{|x,y| asset_ids.index(y.id.to_s) <=> asset_ids.index(x.id.to_s) }.reverse
     @documents = Asset.documents.all(:conditions => {:id => asset_ids }).sort{|x,y| asset_ids.index(y.id.to_s) <=> asset_ids.index(x.id.to_s) }.reverse
 
-RAILS_DEFAULT_LOGGER.debug session[:article_preview].inspect
-
     @article.id = 0
     @article.published_at = Time.now
     @article.created_by = current_user
