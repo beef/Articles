@@ -77,14 +77,14 @@ module ArticlesHelper
     grouped_by_year.each do |year, articles|
       current = this_year.to_i == year
       html << "<li#{' class="current"' if current}>"
-      html << link_to("#{year}", {:controller => 'articles', :action => 'index', :year => year, :month => nil, :day => nil})
+      html << link_to("#{year}", articles_path(:year => year, :month => nil, :day => nil))
       html << (" (#{articles.size})")
       if current
         grouped_by_month = articles.group_by{ |a| a.published_at.month  }.sort.reverse
         html << '<ul>'
         grouped_by_month.each do |month, articles|
           html << '<li>'
-          html << link_to("#{Date::MONTHNAMES[month]}", {:controller => 'articles', :action => 'index', :year => year, :month => month, :day => nil})
+          html << link_to("#{Date::MONTHNAMES[month]}", articles_path(:year => year, :month => month, :day => nil))
           html << (" (#{articles.size})")
           html << '</li>'
         end
