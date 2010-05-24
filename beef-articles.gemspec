@@ -73,15 +73,15 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<acts-as-taggable-on>, [">= 0"])
-      s.add_runtime_dependency(%q<acts_as_commentable>, [">= 0"])
+      s.add_runtime_dependency(%q<mbleigh-acts-as-taggable-on>, [">= 0"])
+      s.add_runtime_dependency(%q<jackdempsey-acts_as_commentable>, [">= 0"])
     else
-      s.add_dependency(%q<acts-as-taggable-on>, [">= 0"])
-      s.add_dependency(%q<acts_as_commentable>, [">= 0"])
+      s.add_dependency(%q<mbleigh-acts-as-taggable-on>, [">= 0"])
+      s.add_dependency(%q<jackdempsey-acts_as_commentable>, [">= 0"])
     end
   else
-    s.add_dependency(%q<acts-as-taggable-on>, [">= 0"])
-    s.add_dependency(%q<acts_as_commentable>, [">= 0"])
+    s.add_dependency(%q<mbleigh-acts-as-taggable-on>, [">= 0"])
+    s.add_dependency(%q<jackdempsey-acts_as_commentable>, [">= 0"])
   end
 end
 
