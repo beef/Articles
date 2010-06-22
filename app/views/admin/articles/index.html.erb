@@ -4,7 +4,7 @@
   <li><%= link_to 'New article', new_admin_article_path, :title => 'Create a new article' %></li>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @articles %>
 
 <table>
   <thead>
@@ -55,5 +55,5 @@
   </tfoot>
 </table>
 
-<%= will_paginate %>
+<%= will_paginate @articles %>
 
