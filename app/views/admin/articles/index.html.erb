@@ -11,6 +11,7 @@
     <tr>
       <%= sortable_table_header :name => "Title", :sort => "title" %>
       <%= sortable_table_header :name => "Status",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Category",  :sort => "category" if Category.all.any? %>
       <%= sortable_table_header :name => "Author",  :sort => "created" %>
       <%= sortable_table_header :name => "Editor",  :sort => "updated" %>
       <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
@@ -26,6 +27,9 @@
     <tr id="article-<%= article.id %>">
       <td><%= link_to h( article.title ), admin_article_path(article), :title => 'Edit this article' %></td>
       <td><%= content_status(article) %></td>
+<% if Category.all.any? -%>
+      <td><%=h article.category.title unless article.category.nil? %></td>
+<% end -%>
       <td><%= article.author %></td>
       <td><%= article.editor %></td>
       <td><%= article.updated_at.to_formatted_s(:short) %></td>
@@ -43,6 +47,7 @@
     <tr>
       <%= sortable_table_header :name => "Title", :sort => "title" %>
       <%= sortable_table_header :name => "Status",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Category",  :sort => "category" if Category.all.any? %>
       <%= sortable_table_header :name => "Author",  :sort => "created_by" %>
       <%= sortable_table_header :name => "Editor",  :sort => "updated_by" %>
       <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
