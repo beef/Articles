@@ -5,9 +5,9 @@
 
 <h1><%= @article.new_record? ? 'New' : 'Editing an' %> Article</h1>
 
-<% form_for([:admin, @article], :html => {:id => 'has-assets-form'}) do |f| %>
+<% form_for(:article, @article, :url => polymorphic_path([:admin, @article]), :html => {:id => 'has-assets-form', :method => ( @article.new_record? ? :post : :put ) }) do |f| %>
   <%= f.error_messages %>
-  
+
   <p>
     <%= f.label :title, 'Title*' %><br/>
     <%= f.text_field :title, :class => 'title' %>
@@ -28,7 +28,7 @@
 <% if Category.exists? %>
   <p>
     <%= f.label :category %>
-    <%= f.collection_select :category_id, Category.all, :id, :title, :prompt => true %> 
+    <%= f.collection_select :category_id, Category.all, :id, :title, :prompt => true %>
   </p>
 <% end -%>
   <p>

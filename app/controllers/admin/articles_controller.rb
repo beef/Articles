@@ -44,7 +44,7 @@ class Admin::ArticlesController < Admin::BaseController
     respond_to do |format|
       if @article.save
         flash[:notice] = 'Article was successfully created.'
-        format.html { redirect_to(admin_articles_url) }
+        format.html { redirect_to :action => 'index'  }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
       else
         format.html { render :action => "show" }
@@ -62,7 +62,7 @@ class Admin::ArticlesController < Admin::BaseController
     respond_to do |format|
       if @article.update_attributes(params[:article])
         flash[:notice] = 'Article was successfully updated.'
-        format.html { redirect_to(admin_articles_url) }
+        format.html { redirect_to :action => 'index' }
         format.xml  { head :ok }
       else
         format.html { render :action => "show" }
@@ -79,7 +79,7 @@ class Admin::ArticlesController < Admin::BaseController
     flash[:notice] = 'Article was successfully deleted.'
 
     respond_to do |format|
-      format.html { redirect_to(admin_articles_url) }
+      format.html { redirect_to :action => 'index' }
       format.xml  { head :ok }
     end
   end

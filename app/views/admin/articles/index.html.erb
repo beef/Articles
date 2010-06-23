@@ -1,7 +1,7 @@
 <h1>Listing Articles</h1>
 
 <ul class="choices">
-  <li><%= link_to 'New article', new_admin_article_path, :title => 'Create a new article' %></li>
+  <li><%= link_to 'New article', { :action => 'new' }, :title => 'Create a new article' %></li>
 </ul>
 
 <%= will_paginate @articles %>
