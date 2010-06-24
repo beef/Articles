@@ -27,7 +27,7 @@
   </p>
 <% if Category.exists? %>
   <p>
-    <%= f.label :category %>
+    <%= f.label :category_id %>
     <%= f.collection_select :category_id, Category.all, :id, :title, :prompt => true %>
   </p>
 <% end -%>
