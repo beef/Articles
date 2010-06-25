@@ -1,16 +1,17 @@
 <h1>Listing Articles</h1>
 
 <ul class="choices">
-  <li><%= link_to 'New article', new_admin_article_path, :title => 'Create a new article' %></li>
+  <li><%= link_to 'New article', { :action => 'new' }, :title => 'Create a new article' %></li>
 </ul>
 
-<%= will_paginate %>
+<%= will_paginate @articles %>
 
 <table>
   <thead>
     <tr>
       <%= sortable_table_header :name => "Title", :sort => "title" %>
       <%= sortable_table_header :name => "Status",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Category",  :sort => "category" if Category.all.any? %>
       <%= sortable_table_header :name => "Author",  :sort => "created" %>
       <%= sortable_table_header :name => "Editor",  :sort => "updated" %>
       <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
@@ -24,8 +25,11 @@
   <tbody>
 <% @articles.each do |article| %>
     <tr id="article-<%= article.id %>">
-      <td><%= link_to h( article.title ), admin_article_path(article), :title => 'Edit this article' %></td>
+      <td><%= link_to h( article.title ), [:admin, article], :title => 'Edit this article' %></td>
       <td><%= content_status(article) %></td>
+<% if Category.all.any? -%>
+      <td><%=h article.category.title unless article.category.nil? %></td>
+<% end -%>
       <td><%= article.author %></td>
       <td><%= article.editor %></td>
       <td><%= article.updated_at.to_formatted_s(:short) %></td>
@@ -33,9 +37,9 @@
       <td><%= article.published_at.to_formatted_s(:short) unless article.published_at.nil? %></td>
       <td><%= article.published_to.to_formatted_s(:short) unless article.published_to.nil? %></td>
       <td><%= link_to pluralize(article.comments.count, 'Comment'), admin_article_comments_path(article), :title => 'Click to view any comments' %></td>
-      <td><%= link_to 'Show', article_url(article), :class => 'show', :title => 'View this article' if article.published? %></td>
-      <td><%= link_to 'Edit', admin_article_path(article), :class => 'edit', :title => 'Edit this article' %></td>
-      <td><%= link_to 'Delete', admin_article_path(article), :confirm => 'Are you sure?', :method => :delete, :class => 'delete', :title => 'Delete this article' %></td>
+      <td><%= link_to 'Show', article, :class => 'show', :title => 'View this article' if article.published? %></td>
+      <td><%= link_to 'Edit', [:admin, article], :class => 'edit', :title => 'Edit this article' %></td>
+      <td><%= link_to 'Delete', [:admin, article], :confirm => 'Are you sure?', :method => :delete, :class => 'delete', :title => 'Delete this article' %></td>
     </tr>
 <% end %>
   </tbody>
@@ -43,6 +47,7 @@
     <tr>
       <%= sortable_table_header :name => "Title", :sort => "title" %>
       <%= sortable_table_header :name => "Status",  :sort => "published_at" %>
+      <%= sortable_table_header :name => "Category",  :sort => "category" if Category.all.any? %>
       <%= sortable_table_header :name => "Author",  :sort => "created_by" %>
       <%= sortable_table_header :name => "Editor",  :sort => "updated_by" %>
       <%= sortable_table_header :name => "Updated",  :sort => "updated_at" %>
@@ -55,5 +60,5 @@
   </tfoot>
 </table>
 
-<%= will_paginate %>
+<%= will_paginate @articles %>
 

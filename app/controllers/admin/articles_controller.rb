@@ -1,11 +1,11 @@
 class Admin::ArticlesController < Admin::BaseController
   unloadable
-  sortable_attributes :created_at, :published_at, :title, :permalink, :published_to, :body, :description, :allow_comments, :created => 'users.name',:category => 'categories.title', :updated => 'updated_bies_articles.name' 
+  sortable_attributes :created_at, :published_at, :title, :permalink, :published_to, :body, :description, :allow_comments, :created => 'users.name', :category => 'categories.title', :updated => 'updated_bies_articles.name'
 
   # GET /articles
   # GET /articles.xml
   def index
-    @articles = Article.paginate :page => params[:page], :per_page => 20, :order => sort_order(:default => 'desc'), :include => [:created_by, :updated_by, :category]
+    @articles = article_type.paginate :page => params[:page], :per_page => 20, :order => sort_order(:default => 'desc'), :include => [:created_by, :updated_by, :category]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class Admin::ArticlesController < Admin::BaseController
   # GET /articles/1
   # GET /articles/1.xml
   def show
-    @article = Article.find(params[:id])
+    @article = article_type.find(params[:id])
 
     respond_to do |format|
       format.html
@@ -27,7 +27,7 @@ class Admin::ArticlesController < Admin::BaseController
   # GET /articles/new
   # GET /articles/new.xml
   def new
-    @article = Article.new
+    @article = article_type.new
 
     respond_to do |format|
       format.html { render :action =>'show' }
@@ -38,13 +38,13 @@ class Admin::ArticlesController < Admin::BaseController
   # POST /articles
   # POST /articles.xml
   def create
-    @article = Article.new(params[:article])
+    @article = article_type.new(params[:article])
     @article.updated_by = @article.created_by = current_user
 
     respond_to do |format|
       if @article.save
         flash[:notice] = 'Article was successfully created.'
-        format.html { redirect_to(admin_articles_url) }
+        format.html { redirect_to :action => 'index'  }
         format.xml  { render :xml => @article, :status => :created, :location => @article }
       else
         format.html { render :action => "show" }
@@ -56,13 +56,13 @@ class Admin::ArticlesController < Admin::BaseController
   # PUT /articles/1
   # PUT /articles/1.xml
   def update
-    @article = Article.find(params[:id])
+    @article = article_type.find(params[:id])
     @article.updated_by = current_user
 
     respond_to do |format|
       if @article.update_attributes(params[:article])
         flash[:notice] = 'Article was successfully updated.'
-        format.html { redirect_to(admin_articles_url) }
+        format.html { redirect_to :action => 'index' }
         format.xml  { head :ok }
       else
         format.html { render :action => "show" }
@@ -74,20 +74,27 @@ class Admin::ArticlesController < Admin::BaseController
   # DELETE /articles/1
   # DELETE /articles/1.xml
   def destroy
-    @article = Article.find(params[:id])
+    @article = article_type.find(params[:id])
     @article.destroy
     flash[:notice] = 'Article was successfully deleted.'
 
     respond_to do |format|
-      format.html { redirect_to(admin_articles_url) }
+      format.html { redirect_to :action => 'index' }
       format.xml  { head :ok }
     end
   end
-  
+
   def preview
     preview_params = params[:article]
-    article = Article.find_by_id(params[:id])
+    article = article_type.find_by_id(params[:id])
     preview_params.reverse_merge!(article.attributes) if article
     session[:article_preview] = preview_params
   end
+
+protected
+
+  def article_type
+    Article
+  end
+
 end

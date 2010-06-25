@@ -11,12 +11,12 @@
 
 <!-- so:main-content -->
 <div id="main-content">
-    
+
   <dl id="articles">
   <%= render :partial => @articles %>
   </dl>
-  
-  <%= will_paginate(:previous_label => 'previous', :next_label => 'next') %>
-    
+
+  <%= will_paginate(@articles, :previous_label => 'previous', :next_label => 'next') %>
+
 </div>
 <!-- eo:main-content -->
