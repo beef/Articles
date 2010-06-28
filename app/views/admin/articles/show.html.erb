@@ -5,7 +5,7 @@
 
 <h1><%= @article.new_record? ? 'New' : 'Editing an' %> Article</h1>
 
-<% form_for(:article, @article, :url => polymorphic_path([:admin, @article]), :html => {:id => 'has-assets-form', :method => ( @article.new_record? ? :post : :put ) }) do |f| %>
+<% form_for(:article, @article, :url => polymorphic_path([:admin, @article]), :html => {:id => 'has-assets-form', :class => 'edit_article', :method => ( @article.new_record? ? :post : :put ) }) do |f| %>
   <%= f.error_messages %>
 
   <p>
