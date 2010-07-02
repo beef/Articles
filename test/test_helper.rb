@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'test/unit'
 require 'active_record'
+require 'active_support/core_ext/time/zones'
+require 'logger'
 require 'shoulda/rails'
 require 'factory_girl'
 require 'faker'
