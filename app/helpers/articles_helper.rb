@@ -96,7 +96,7 @@ module ArticlesHelper
   end
 
   def related_articles(taggable, &block)
-    articles = Article.published.all(taggable.related_search_options(:tags, Article, :limit => 3))
+    articles = Article.published.tagged_with(taggable.tag_list, :limit => 3)
     return if articles.empty?
     if block_given?
       yield(articles)
