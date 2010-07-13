@@ -96,7 +96,7 @@ module ArticlesHelper
   end
 
   def related_articles(taggable, &block)
-    articles = Article.published.tagged_with(taggable.tag_list, :limit => 3)
+    articles = Article.published.tagged_with(taggable.tag_list).all(:conditions => ["articles.id != ?", taggable.id], :limit => 3, :group => 'articles.id')
     return if articles.empty?
     if block_given?
       yield(articles)
